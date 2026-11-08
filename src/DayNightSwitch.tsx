@@ -1,4 +1,4 @@
-import { useState, type CSSProperties } from 'react'
+import { useState, type CSSProperties, type MouseEvent } from 'react'
 import './DayNightSwitch.css'
 
 type Point = { x: number; y: number }
@@ -27,7 +27,7 @@ const pixelCount = Math.max(sunPixels.length, moonPixels.length)
 
 export interface DayNightSwitchProps {
   dark: boolean
-  onToggle: () => void
+  onToggle: (event: MouseEvent<HTMLButtonElement>) => void
   className?: string
 }
 
@@ -44,9 +44,9 @@ export default function DayNightSwitch({ dark, onToggle, className = '' }: DayNi
       aria-checked={dark}
       title={`Switch to ${dark ? 'light' : 'dark'} mode`}
       className={`day-night-switch ${dark ? 'is-dark' : 'is-light'} ${className}`}
-      onClick={() => {
+      onClick={event => {
         setClicks(value => value + 1)
-        onToggle()
+        onToggle(event)
       }}
     >
       <span className="day-night-switch__track" aria-hidden="true">

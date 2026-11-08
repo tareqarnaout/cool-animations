@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { createRoot } from 'react-dom/client'
-import { DayNightSwitch } from '../src'
+import { flushSync } from 'react-dom'
+import { DayNightSwitch, runThemeTransition } from '../src'
 import './style.css'
 
 function Demo() {
@@ -16,8 +17,15 @@ function Demo() {
       <section aria-labelledby="title">
         <p className="eyebrow">A little light. A little motion.</p>
         <h1 id="title">Change the mood.</h1>
-        <p className="description">A glowing switch with a pixel sun and moon.<br />Click to scatter the pixels and slide into the other side.</p>
-        <div className="switch-stage"><DayNightSwitch dark={dark} onToggle={() => setDark(value => !value)} /></div>
+        <p className="description">A glowing switch with a pixel sun and moon.<br />Click for a glowing, crystalline theme reveal.</p>
+        <div className="switch-stage"><DayNightSwitch dark={dark} onToggle={event => {
+          const bounds = event.currentTarget.getBoundingClientRect()
+          runThemeTransition({
+            dark: !dark,
+            origin: { x: bounds.left + bounds.width / 2, y: bounds.top + bounds.height / 2 },
+            update: () => flushSync(() => setDark(value => !value)),
+          })
+        }} /></div>
         <p className="mode" aria-live="polite">{dark ? 'Moonlight' : 'Daylight'}</p>
       </section>
       <footer><span>React + CSS + SVG</span><a href="https://github.com/tareqarnaout/cool-animations">View source ↗</a></footer>

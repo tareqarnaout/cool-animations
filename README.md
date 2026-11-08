@@ -35,12 +35,36 @@ export default function Appearance() {
 }
 ```
 
+## Full-screen theme reveal
+
+![Glowing crystalline theme reveal in progress](docs/crystal-reveal.png)
+
+`runThemeTransition` adds a jagged reveal from the switch, with violet mesh and sparks when entering dark mode and gold when entering light mode. It uses the browser [View Transitions API](https://developer.mozilla.org/en-US/docs/Web/API/Document/startViewTransition) to reveal your real UI. Reduced-motion users and browsers without that API get an immediate theme change.
+
+```tsx
+import { flushSync } from 'react-dom'
+import { DayNightSwitch, runThemeTransition } from '@tareqarnaout/cool-animations'
+import '@tareqarnaout/cool-animations/style.css'
+
+<DayNightSwitch dark={dark} onToggle={event => {
+  const bounds = event.currentTarget.getBoundingClientRect()
+  const next = !dark
+  runThemeTransition({
+    dark: next,
+    origin: { x: bounds.left + bounds.width / 2, y: bounds.top + bounds.height / 2 },
+    update: () => flushSync(() => setDark(next)),
+  })
+}} />
+```
+
+Apply your page's theme in the `update` callback so it is ready for the browser's new snapshot. The animation lasts about 1.45 seconds and removes its overlay afterward. Repeated toggles cancel the running effect and apply the latest choice immediately.
+
 The switch is controlled. Apply `dark` to your app's theme or theme provider, and persist it if needed. It does not change document classes or save preferences itself.
 
 | Prop | Type | Purpose |
 | --- | --- | --- |
 | `dark` | `boolean` | Current mode. Moon on the left when true, sun on the right when false. |
-| `onToggle` | `() => void` | Called when the switch is activated. Update your theme here. |
+| `onToggle` | `(event: React.MouseEvent<HTMLButtonElement>) => void` | Called when the switch is activated. Update your theme here. |
 | `className` | `string` | Optional class for layout or styling. |
 
 Set `--day-night-focus` on the switch or an ancestor to customize its focus outline. The base control is 90 × 48 CSS pixels. Keyboard Space and Enter activate the button, `role="switch"` and `aria-checked` expose its state, and reduced-motion preferences disable movement.
