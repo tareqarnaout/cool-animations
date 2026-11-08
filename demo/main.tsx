@@ -17,7 +17,7 @@ function Demo() {
       <section aria-labelledby="title">
         <p className="eyebrow">A little light. A little motion.</p>
         <h1 id="title">Change the mood.</h1>
-        <p className="description">A glowing switch with a pixel sun and moon.<br />Click for a glowing, crystalline theme reveal.</p>
+        <p className="description">A glowing switch with a pixel sun and moon.<br />Drag the button or click for a crystalline theme reveal.</p>
         <div className="switch-stage"><DayNightSwitch dark={dark} onToggle={event => {
           const bounds = event.currentTarget.getBoundingClientRect()
           runThemeTransition({

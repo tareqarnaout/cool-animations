@@ -15,7 +15,9 @@
   background: transparent;
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
-  touch-action: manipulation;
+  touch-action: pan-y;
+  user-select: none;
+  -webkit-user-select: none;
 }
 
 .day-night-switch:focus-visible {
@@ -106,6 +108,11 @@
 .day-night-switch.is-dark .day-night-switch__thumb::before {
   background: radial-gradient(ellipse at 25% 100%, #9b8cff70, transparent 65%);
 }
+
+.day-night-switch__thumb { cursor: grab; }
+.day-night-switch.is-dragging,
+.day-night-switch.is-dragging .day-night-switch__thumb { cursor: grabbing; }
+.day-night-switch.is-dragging .day-night-switch__thumb { transition: none; }
 
 @keyframes day-night-orbit { to { stroke-dashoffset: -100; } }
 @keyframes day-night-pixels {

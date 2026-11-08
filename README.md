@@ -67,7 +67,9 @@ The switch is controlled. Apply `dark` to your app's theme or theme provider, an
 | `onToggle` | `(event: React.MouseEvent<HTMLButtonElement>) => void` | Called when the switch is activated. Update your theme here. |
 | `className` | `string` | Optional class for layout or styling. |
 
-Set `--day-night-focus` on the switch or an ancestor to customize its focus outline. The base control is 90 × 48 CSS pixels. Keyboard Space and Enter activate the button, `role="switch"` and `aria-checked` expose its state, and reduced-motion preferences disable movement.
+Drag the thumb with a mouse, finger, or pen. It follows your pointer and commits the nearest mode when released past the midpoint. Releasing on the original side or cancelling a gesture returns it without changing the theme. A click or tap still toggles it, and vertical touch gestures can scroll the page. CSS-scaled instances, including the larger demo, use the same drag behavior.
+
+Set `--day-night-focus` on the switch or an ancestor to customize its focus outline. The base control is 90 × 48 CSS pixels. Keyboard Space and Enter activate the button, `role="switch"` and `aria-checked` expose its state, and reduced-motion preferences disable automatic movement. The thumb still follows direct dragging.
 
 ## Build
 
