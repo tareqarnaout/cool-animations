@@ -1,0 +1,46 @@
+{
+  "name": "@tareqarnaout/cool-animations",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Reusable React animations, starting with a glowing pixel day/night switch.",
+  "files": [
+    "dist"
+  ],
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./style.css": "./dist/DayNightSwitch.css"
+  },
+  "sideEffects": [
+    "**/*.css"
+  ],
+  "scripts": {
+    "dev": "vite --host 127.0.0.1",
+    "build": "tsc --noEmit && vite build && tsc -p tsconfig.lib.json",
+    "build:demo": "tsc --noEmit && vite build --config vite.demo.config.ts",
+    "preview": "vite preview --config vite.demo.config.ts --host 127.0.0.1"
+  },
+  "peerDependencies": {
+    "react": "^18.2.0 || ^19.0.0"
+  },
+  "devDependencies": {
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "@types/react": "^18.2.55",
+    "@types/react-dom": "^18.2.19",
+    "typescript": "5.9.3",
+    "vite": "5.4.21"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tareqarnaout/cool-animations.git"
+  }
+}
